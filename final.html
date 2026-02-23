@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Final Question</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <style>
+        body { background: linear-gradient(135deg, #fff5f5 0%, #feb7b7 100%); overflow: hidden; }
+        .hollow-heart { position: absolute; color: #e53e3e; font-size: 2rem; user-select: none; pointer-events: none; animation: float-up 5s linear infinite; }
+        @keyframes float-up { 0% { transform: translateY(110vh) scale(0.5); opacity: 0; } 50% { opacity: 0.8; } 100% { transform: translateY(-10vh) scale(1.5); opacity: 0; } }
+        .big-heart { position: absolute; font-size: 5rem; animation: explode 2s ease-out forwards; pointer-events: none; }
+        @keyframes explode { 0% { transform: translate(0, 0) scale(1); opacity: 1; } 100% { transform: translate(var(--x), var(--y)) scale(2); opacity: 0; } }
+    </style>
+</head>
+<body class="h-screen flex items-center justify-center relative">
+    <div id="heart-container" class="fixed inset-0 pointer-events-none"></div>
+
+    <div id="main-card" class="z-10 bg-white/60 backdrop-blur-md p-12 rounded-[50px] shadow-2xl max-w-lg w-full text-center border-2 border-white mx-4">
+        <div class="text-6xl mb-6">💍</div>
+        <h1 class="text-3xl font-black text-red-600 mb-8">One Final Question...</h1>
+        <p class="text-xl text-gray-700 mb-10 font-medium">Will you be my forever?</p>
+
+        <div class="flex justify-center items-center gap-6">
+            <button onclick="celebrate()" class="bg-red-500 hover:bg-red-600 text-white font-bold py-4 px-12 rounded-full text-xl shadow-lg transform hover:scale-105 transition-all">
+                YES! ❤️
+            </button>
+            <a href="no.html" class="bg-gray-200 text-gray-500 font-bold py-4 px-12 rounded-full text-xl hover:bg-gray-300 transition-all">
+                No
+            </a>
+        </div>
+    </div>
+
+    <div id="final-popup" class="hidden fixed z-50 bg-white/95 p-12 rounded-[50px] shadow-2xl text-center border-4 border-red-400">
+        <h2 class="text-4xl font-black text-red-600">Now we're stuck together forever ❤️</h2>
+        <p class="text-xl text-gray-600 mt-4">My heart is yours!</p>
+        <div class="mt-6 text-5xl">🧸🥳💖</div>
+    </div>
+
+    <script>
+        function createHollowHeart() {
+            const container = document.getElementById('heart-container');
+            const heart = document.createElement('div');
+            heart.classList.add('hollow-heart'); heart.innerHTML = '♡';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = (Math.random() * 2 + 3) + 's';
+            container.appendChild(heart);
+            setTimeout(() => heart.remove(), 5000);
+        }
+        setInterval(createHollowHeart, 300);
+
+        function celebrate() {
+            document.getElementById('main-card').style.display = 'none';
+            const popup = document.getElementById('final-popup');
+            popup.classList.remove('hidden');
+            popup.classList.add('flex', 'flex-col', 'items-center', 'justify-center');
+
+            for (let i = 0; i < 30; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.classList.add('big-heart'); heart.innerHTML = '❤️';
+                    heart.style.left = '50vw'; heart.style.top = '50vh';
+                    heart.style.setProperty('--x', (Math.random() - 0.5) * 1000 + 'px');
+                    heart.style.setProperty('--y', (Math.random() - 0.5) * 1000 + 'px');
+                    document.body.appendChild(heart);
+                    setTimeout(() => heart.remove(), 2000);
+                }, i * 50);
+            }
+            confetti({ particleCount: 200, spread: 70, origin: { y: 0.6 } });
+        }
+    </script>
+</body>
+</html>

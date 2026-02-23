@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Forever</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background: linear-gradient(135deg, #fff5f5 0%, #fed7d7 100%);
+            font-family: 'Segoe UI', sans-serif;
+            overflow: hidden;
+        }
+
+        /* Red Hollow Heart Animation */
+        .hollow-heart {
+            position: absolute;
+            color: #e53e3e;
+            font-size: 2.5rem;
+            user-select: none;
+            pointer-events: none;
+            animation: float-up 6s linear infinite;
+        }
+
+        @keyframes float-up {
+            0% { transform: translateY(110vh) scale(0.5) rotate(0deg); opacity: 0; }
+            20% { opacity: 0.8; }
+            100% { transform: translateY(-10vh) scale(1.2) rotate(360deg); opacity: 0; }
+        }
+
+        .slide { display: none; animation: fadeIn 0.8s ease-out forwards; }
+        .slide.active { display: block; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="h-screen flex items-center justify-center">
+
+    <div id="heart-container" class="fixed inset-0 pointer-events-none"></div>
+
+    <div class="z-10 bg-white/70 backdrop-blur-xl p-10 rounded-[50px] shadow-2xl border-2 border-red-200 max-w-lg w-full text-center relative mx-4">
+        
+        <div class="flex justify-center mb-6">
+            <svg class="w-24 h-24" viewBox="0 0 200 200">
+                <circle cx="65" cy="65" r="25" fill="#8B4513"/><circle cx="135" cy="65" r="25" fill="#8B4513"/><circle cx="100" cy="115" r="65" fill="#A0522D"/>
+                <circle cx="100" cy="125" r="35" fill="#D2B48C"/><circle cx="80" cy="105" r="8" fill="#000"/><circle cx="120" cy="105" r="8" fill="#000"/>
+                <path d="M90 135 Q100 145 110 135" stroke="#000" stroke-width="4" fill="none"/>
+            </svg>
+        </div>
+
+        <div id="slides-wrapper">
+            <div class="slide active">
+                <h2 class="text-2xl font-bold text-red-600 mb-4 italic"> #1</h2>
+                <p class="text-xl text-gray-700">I love the way you make me feel safe, like no matter what happens, I’ll be okay with you🤍</p>
+            </div>
+
+            <div class="slide">
+                <h2 class="text-2xl font-bold text-red-600 mb-4 italic"> #2</h2>
+                <p class="text-xl text-gray-700">I love how your smile can instantly fix my worst days🌸</p>
+            </div>
+
+            <div class="slide">
+                <h2 class="text-2xl font-bold text-red-600 mb-4 italic"> #3</h2>
+                <p class="text-xl text-gray-700">I love that with you, I can be completely myself without pretending💕</p>
+            </div>
+
+            <div class="slide">
+                <h2 class="text-2xl font-bold text-red-600 mb-4 italic"> #4</h2>
+                <p class="text-xl text-gray-700">The little things—like the way you look at me when you think I'm not noticing♾️</p>
+            </div>
+
+            <div class="slide">
+                <h2 class="text-2xl font-bold text-red-600 mb-4 italic"> #5</h2>
+                <p class="text-xl text-gray-700">I love how you understand my silence, not just my words ✨</p>
+            </div>
+
+            <div class="slide">
+                <h2 class="text-2xl font-bold text-red-600 mb-4 italic"> #6</h2>
+                <p class="text-xl text-gray-700">How safe I feel in your arms. It's the only place in the world that feels like home💖</p>
+            </div>
+
+            <div class="slide">
+                <h2 class="text-3xl font-black text-red-600 mb-6">But wait...</h2>
+                <p class="text-lg text-gray-600 mb-8 italic">No matter how much I try to express it, my love for you will always be bigger than any words I could ever write 🥹💌</p>
+                <a href="thought.html" class="inline-block bg-red-500 hover:bg-red-600 text-white font-bold py-4 px-10 rounded-full text-xl shadow-lg transition-all hover:scale-105">
+                    Wanna know more? ✨
+                </a>
+            </div>
+        </div>
+
+        <div id="nav-buttons" class="mt-10 flex justify-center">
+            <button id="nextBtn" onclick="nextSlide()" class="bg-red-50 text-red-500 border-2 border-red-200 px-10 py-2 rounded-full font-bold hover:bg-red-100 transition-all">
+                Next →
+            </button>
+        </div>
+    </div>
+
+    <script>
+        function createHollowHeart() {
+            const container = document.getElementById('heart-container');
+            const heart = document.createElement('div');
+            heart.classList.add('hollow-heart'); heart.innerHTML = '♡'; 
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = (Math.random() * 2 + 4) + 's';
+            container.appendChild(heart);
+            setTimeout(() => heart.remove(), 6000);
+        }
+        setInterval(createHollowHeart, 350);
+
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const nextBtn = document.getElementById('nextBtn');
+
+        function nextSlide() {
+            slides[currentSlide].classList.remove('active');
+            currentSlide++;
+            if (currentSlide < slides.length) {
+                slides[currentSlide].classList.add('active');
+            }
+            if (currentSlide === slides.length - 1) {
+                nextBtn.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>

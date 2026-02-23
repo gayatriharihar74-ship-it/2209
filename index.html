@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Special Greeting</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            /* Matching gradient from your other pages */
+            background: linear-gradient(135deg, #fff5f5 0%, #fed7d7 100%);
+            overflow: hidden;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* Red Hollow Heart Animation to match Forever/Thoughts pages */
+        .hollow-heart {
+            position: absolute;
+            color: #e53e3e; /* Red color */
+            font-size: 2rem;
+            user-select: none;
+            pointer-events: none;
+            animation: float-up 6s linear infinite;
+        }
+
+        @keyframes float-up {
+            0% { transform: translateY(110vh) scale(0.5); opacity: 0; }
+            20% { opacity: 0.8; }
+            100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+        }
+
+        /* Attractive Popup Animation */
+        #popup {
+            display: none;
+            animation: popIn 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes popIn {
+            0% { opacity: 0; transform: scale(0.5) translateY(50px); }
+            100% { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center h-screen relative">
+
+    <div id="heart-container" class="fixed inset-0 pointer-events-none"></div>
+
+    <div id="popup" class="z-10 glass-card p-12 rounded-[50px] shadow-2xl text-center max-w-sm mx-4 relative">
+        
+        <div class="text-6xl mb-6 animate-bounce">👋</div>
+        
+        <h2 class="text-4xl font-black text-red-500 mb-3 tracking-tight">Hii Cutie!</h2>
+        
+        <p class="text-gray-700 text-lg mb-10 leading-relaxed italic">
+            "I've built something just for you... Are you ready to see it?"
+        </p>
+        
+        <a href="forever.html" class="inline-block bg-red-500 hover:bg-red-600 text-white font-black py-4 px-12 rounded-full transition-all transform hover:scale-110 shadow-[0_10px_20px_rgba(239,68,68,0.3)] active:scale-95">
+            Click Me ✨
+        </a>
+
+        <div class="mt-6 text-2xl opacity-50">🧸❤️</div>
+    </div>
+
+    <script>
+        // Hollow Hearts Generator (Matches Forever Page Logic)
+        function createHollowHeart() {
+            const container = document.getElementById('heart-container');
+            const heart = document.createElement('div');
+            heart.classList.add('hollow-heart');
+            heart.innerHTML = '♡'; 
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.fontSize = (Math.random() * 15 + 20) + 'px';
+            heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
+            container.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 7000);
+        }
+
+        // Start heart rain immediately
+        setInterval(createHollowHeart, 400);
+
+        // Show popup after a short delay
+        window.onload = () => {
+            setTimeout(() => {
+                document.getElementById('popup').style.display = 'block';
+            }, 600);
+        };
+    </script>
+</body>
+</html>

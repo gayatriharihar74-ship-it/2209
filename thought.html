@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Thoughts on You</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background: linear-gradient(135deg, #fff5f5 0%, #fed7d7 100%); overflow-x: hidden; }
+        .hollow-heart { position: absolute; color: #e53e3e; font-size: 2.5rem; user-select: none; pointer-events: none; animation: float-up 6s linear infinite; z-index: 0;}
+        @keyframes float-up { 0% { transform: translateY(110vh) scale(0.5); opacity: 0; } 20% { opacity: 0.8; } 100% { transform: translateY(-10vh) scale(1.2); opacity: 0; } }
+        .thought-bubble { animation: float-bubble 4s ease-in-out infinite; }
+        @keyframes float-bubble { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-6">
+    <div id="heart-container" class="fixed inset-0 pointer-events-none"></div>
+
+    <div class="z-10 bg-white/80 backdrop-blur-xl p-8 rounded-[40px] shadow-2xl border-2 border-red-100 max-w-xl w-full">
+        <h1 class="text-3xl font-black text-red-600 text-center mb-8 italic">Everytime I think about you...</h1>
+        
+        <div class="space-y-6 text-gray-700 text-lg leading-relaxed text-center">
+            <p class="thought-bubble bg-red-50 p-4 rounded-2xl border border-red-100 shadow-sm">
+                "Sometimes I catch myself smiling just because I remembered something funny you said."
+            </p>
+            <p class="thought-bubble bg-red-50 p-4 rounded-2xl border border-red-100 shadow-sm" style="animation-delay: 1s;">
+                "I think about how lucky I am that out of everyone in the world, I found you."
+            </p>
+            <p class="thought-bubble bg-red-50 p-4 rounded-2xl border border-red-100 shadow-sm" style="animation-delay: 2s;">
+                "I think about our future... and it's the only one I want to live in."
+            </p>
+        </div>
+
+        <div class="mt-12 text-center">
+            <p class="text-red-400 mb-4 font-bold tracking-widest uppercase text-sm">And so...</p>
+            <a href="final.html" class="inline-block bg-gradient-to-r from-red-500 to-pink-500 text-white font-bold py-5 px-14 rounded-full text-2xl shadow-[0_10px_20px_rgba(239,68,68,0.4)] transition-all hover:scale-110 hover:shadow-[0_15px_30px_rgba(239,68,68,0.6)] group">
+                Continue to the Heart ❤️
+            </a>
+        </div>
+    </div>
+
+    <script>
+        function createHollowHeart() {
+            const container = document.getElementById('heart-container');
+            const heart = document.createElement('div');
+            heart.classList.add('hollow-heart'); heart.innerHTML = '♡';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = (Math.random() * 2 + 4) + 's';
+            container.appendChild(heart);
+            setTimeout(() => heart.remove(), 6000);
+        }
+        setInterval(createHollowHeart, 350);
+    </script>
+</body>
+</html>
